@@ -1,24 +1,11 @@
 import Airtable from 'airtable'
-import 'dotenv/config' // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
-// import express from 'express'
+import 'dotenv/config' 
 
 const base = new Airtable({apiKey: process.env.AIRTABLE_API_KEY}).base('appl2a4TBuQImJIiu');
 
 // let recordID = 'recxZLSGzpE43yvdq' // test record
 const tableID = 'tblMXiuJrT9lvXo6U';
 const table = base(tableID);
-
-// find (recordId:string): Promise<Record<FieldSet>>
-// export const findRecord = async (recordID) => {
-//     table.find(recordID, (err, record) => {
-//         if (!err) {
-//             console.log(`Found record: ${record.get('Project Name')}`);
-//             return record.get('Store page');
-//         } else {
-//             return `${err.message} : ${err.error}`;
-//         }
-//     })
-// } 
 
 export const findRecord = async (recordID) => {
     try {
