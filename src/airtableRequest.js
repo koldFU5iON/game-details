@@ -1,5 +1,8 @@
 import Airtable from 'airtable'
-const base = new Airtable({apiKey: 'keyLbQBxv9kKdTytn'}).base('appl2a4TBuQImJIiu');
+import 'dotenv/config' // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
+// import express from 'express'
+
+const base = new Airtable({apiKey: process.env.AIRTABLE_API_KEY}).base('appl2a4TBuQImJIiu');
 
 // let recordID = 'recxZLSGzpE43yvdq' // test record
 const tableID = 'tblMXiuJrT9lvXo6U';
