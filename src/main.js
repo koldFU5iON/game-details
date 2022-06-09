@@ -1,18 +1,26 @@
 import { findRecord, updateRecord } from './airtableRequest.js'
 import { findGame } from './steamRequest.js'
+import { record_id } from './tests.js'
 
 const data = {} // data record to input necessary fields for updates
-
-const recordID = 'recVGaP4TAlHh7W6y' // recieve record ID from webhook
+const recordID = record_id // recieve record ID from webhook
 
 // get record
 let game = await findRecord(recordID)
 
 // collect information on record ahead of steam request
 if(game) {
-    
     data.Platform = game.get('Platform') // adding in existing Genre's (avoids deletion)
-    !data.Platform.includes('Windows PC') ? data.Platform.push('Windows PC') : console.log('Windows PC already exists in Platform')  // adding 'Windows PC' since content is coming from Steam
+    if(!data.Platform) {
+        data['Platform'] = ['Windows PC']
+    } else if (!data.Platform.includes('Windows PC')) {
+        data.Platform.push('Windows PC')
+        
+    } else {
+        console.log('"Windows PC" already exists in platform field')
+    }
+
+    // load store page URL
     data['Store page'] = game.get('Store page')
     
 } else {
