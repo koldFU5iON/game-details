@@ -1,6 +1,10 @@
-import * as SteamAPI from 'steamapi'
+import SteamAPI from 'steamapi'
+import 'dotenv/config' 
 
-const steam = new SteamAPI('B582E4ADD33A34830D513E91ECB8B30F');
-steam.getGameDetails('1335830').then(id => {
-    console.log(id); 
+const gameID = '1335830'
+
+
+const steam = new SteamAPI(process.env.STEAM_API_KEY);
+steam.getGameDetails(gameID).then(game => {
+    console.log(`Game Name: ${game.name} \nWebsite: ${game.website} \nStudio(s): ${game.developers[0]}`); 
 });
