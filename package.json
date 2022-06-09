@@ -1,7 +1,8 @@
 {
   "dependencies": {
     "airtable": "^0.11.4",
-    "dotenv": "^16.0.1"
+    "dotenv": "^16.0.1",
+    "steamapi": "^2.2.0"
   },
   "type": "module",
   "name": "mwu-games",
