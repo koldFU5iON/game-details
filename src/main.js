@@ -1,6 +1,6 @@
-import { findRecord, updateRecord } from './airtableRequest.js'
-import { findGame } from './steamRequest.js'
-import { record_id } from './tests.js'
+import { findRecord, updateRecord } from './airtable_api.js';
+import { findGame } from './steam_api.js';
+import { record_id } from './tests.js';
 
 const data = {} // data record to input necessary fields for updates
 const recordID = record_id // recieve record ID from webhook
