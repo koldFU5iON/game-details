@@ -19,7 +19,7 @@ export const findRecord = async (recordID) => {
 export const updateRecord = async (recordID, data) => {
             table.update(recordID, data, (err, record) => {
                 if(!err) {
-                    console.log(`${record['fields']['name']} was updated successfully`) //.get('Project Name')
+                    console.log(`Record was updated successfully`) //.get('Project Name')
                 } else {
                     console.error(`${err.message} : ${err.error}`);
                 }
