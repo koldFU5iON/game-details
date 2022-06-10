@@ -1,17 +1,21 @@
 {
   "dependencies": {
     "airtable": "^0.11.4",
-    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
     "steamapi": "^2.2.0"
   },
   "type": "module",
   "name": "mwu-games",
   "version": "1.0.0",
   "description": "detail checker for steam games",
-  "main": "main.js",
+  "main": "src/index.js",
   "scripts": {
-    "test": "test"
+    "devStart": "nodemon src/index.js"
   },
   "author": "Devon Stanton",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "dotenv": "^16.0.1",
+    "nodemon": "^2.0.16"
+  }
 }
