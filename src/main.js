@@ -13,8 +13,7 @@ export const steamGame = async (recordID) => {
 
         data.Platform = record.get('Platform') // adding in existing Platforms's
         data.Genre = record.get('Genre') // adding in existing Genre's
-
-        checkMulitSelect(data.Platform, 'Windows PC')
+        checkMulitSelect('Platform', 'Windows PC')
 
         // load store page URL
         data['Store page'] = record.get('Store page')
@@ -35,34 +34,28 @@ export const steamGame = async (recordID) => {
 }
 
 const checkMulitSelect = (field, value) => {
-    // check an array in airtable for an existing field.
-    if(!field) {
-        field = value;
-    } else if (!field.includes(value)) {
-        field.push(value);
+    if(!data[field]) {
+        data[field] = [value]
+        console.log(`No items currently in field, added : ${value}`)
+    } else if (!data[field].includes(value)) {
+        data[field].push(value);
     } else {
         console.log(`${value} already exists in field.`);
     }
-    // return field;
 }
 
-const updateAirtable = (gameData, recordID) => {
-    let genres = 
-    // console.log(gameData.genre)
-    data['Project Name'] = gameData.name
-    data['Expected Release'] = gameData.release_date.date
-    data['Website'] = gameData.website
-    data['Studio Name'] = gameData.developers.join(',')
-    let aboutMarkdown = convert(gameData.detailed_description)
-    data['About'] = aboutMarkdown
-    // for(let genre in gameData.genres){
-    //     genres.push(genre.description)
-    //     console.log(genre)
-    // }
-    // console.log(genres)
-    // data['Genre'] = genres
+const updateAirtable = (steamGame, recordID) => {
+
+    data['Project Name'] = steamGame.name
+    data['Expected Release'] = steamGame.release_date.date
+    data['Website'] = steamGame.website
+    data['Studio Name'] = steamGame.developers.join(',')
+    data['About'] = convert(steamGame.detailed_description)
+
+    // multi-select fields
+    for(let genre of steamGame.genres){
+        checkMulitSelect('Genre', genre.description)
+    }
 
     updateRecord(recordID, data) // update base with new data
 }
-
-// steamGame('recSXjkClU0xYAfea')
