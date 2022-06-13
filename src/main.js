@@ -6,22 +6,18 @@ import { convert } from 'html-to-markdown';
 const data = {} // data record to input necessary fields for updates
 // get record
 export const steamGame = async (recordID) => {
-    let game = await findRecord(recordID)
+    let record = await findRecord(recordID)
 
     // collect information on record ahead of steam request
-    if(game) {
-        data.Platform = game.get('Platform') // adding in existing Genre's (avoids deletion)
-        if(!data.Platform) {
-            data['Platform'] = ['Windows PC']
-        } else if (!data.Platform.includes('Windows PC')) {
-            data.Platform.push('Windows PC')
-            
-        } else {
-            console.log('"Windows PC" already exists in platform field')
-        }
+    if(record) {
+
+        data.Platform = record.get('Platform') // adding in existing Platforms's
+        data.Genre = record.get('Genre') // adding in existing Genre's
+
+        checkMulitSelect(data.Platform, 'Windows PC')
 
         // load store page URL
-        data['Store page'] = game.get('Store page')
+        data['Store page'] = record.get('Store page')
         
     } else {
         console.log(`Did not find the record with ID: ${recordID}`)
@@ -38,8 +34,21 @@ export const steamGame = async (recordID) => {
     
 }
 
+const checkMulitSelect = (field, value) => {
+    // check an array in airtable for an existing field.
+    if(!field) {
+        field = value;
+    } else if (!field.includes(value)) {
+        field.push(value);
+    } else {
+        console.log(`${value} already exists in field.`);
+    }
+    // return field;
+}
+
 const updateAirtable = (gameData, recordID) => {
-    let genres = []
+    let genres = 
+    // console.log(gameData.genre)
     data['Project Name'] = gameData.name
     data['Expected Release'] = gameData.release_date.date
     data['Website'] = gameData.website
@@ -48,7 +57,9 @@ const updateAirtable = (gameData, recordID) => {
     data['About'] = aboutMarkdown
     // for(let genre in gameData.genres){
     //     genres.push(genre.description)
+    //     console.log(genre)
     // }
+    // console.log(genres)
     // data['Genre'] = genres
 
     updateRecord(recordID, data) // update base with new data
