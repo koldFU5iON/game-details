@@ -1,8 +1,9 @@
 import express from "express";
 import { steamGame } from "./main.js";
+import 'dotenv/config'
 
 const app = express();
-const PORT = 8080;
+const PORT = process.env.PORT;
 
 app.use(express.json())
 
