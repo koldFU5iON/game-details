@@ -1,5 +1,7 @@
 import { findRecord, updateRecord } from './airtable_api.js';
 import { findGame } from './steam_api.js';
+import { convert } from 'html-to-markdown';
+
 
 const data = {} // data record to input necessary fields for updates
 // get record
@@ -42,7 +44,8 @@ const updateAirtable = (gameData, recordID) => {
     data['Expected Release'] = gameData.release_date.date
     data['Website'] = gameData.website
     data['Studio Name'] = gameData.developers.join(',')
-    data['About'] = gameData.detailed_description
+    let aboutMarkdown = convert(gameData.detailed_description)
+    data['About'] = aboutMarkdown
     // for(let genre in gameData.genres){
     //     genres.push(genre.description)
     // }
