@@ -24,6 +24,7 @@ export const steamGame = async (recordID) => {
 
     // find steam data
     const steamData = await findGame(data['Store page'])
+    
     // update
     if(steamData) {
         updateAirtable(steamData, recordID)
@@ -50,7 +51,7 @@ const updateAirtable = (steamGame, recordID) => {
     data['Expected Release'] = steamGame.release_date.date
     data['Website'] = steamGame.website
     data['Studio Name'] = steamGame.developers.join(',')
-    data['About'] = convert(steamGame.detailed_description)
+    data['About'] = convert(steamGame.about_the_game)
 
     // multi-select fields
     for(let genre of steamGame.genres){
