@@ -58,5 +58,12 @@ const updateAirtable = (steamGame, recordID) => {
         checkMulitSelect('Genre', genre.description)
     }
 
+    // screenshots
+    let screenshots = []
+    for(let image of steamGame.screenshots) {
+        screenshots.push({'url': image.path_full})
+    }
+    data['Artwork'] = screenshots
+
     updateRecord(recordID, data) // update base with new data
 }
