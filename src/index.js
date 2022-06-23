@@ -21,3 +21,18 @@ app.get('/steam-game/:id',(req,res) => {
         steamGame(id)
     }
 })
+
+
+// todo 
+app.get('/nintendo-game/:id', (req, res) => {
+    const { id } = req.params
+})
+
+/* 
+todo 
+1. Nintendo
+2. Epic
+3. Occulus
+4. Android
+5. Apple iOS
+*/
