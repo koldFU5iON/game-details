@@ -59,11 +59,10 @@ const updateAirtable = (steamGame, recordID) => {
     }
 
     // screenshots
-    let screenshots = []
-    for(let image of steamGame.screenshots) {
-        screenshots.push({'url': image.path_full})
-    }
-    data['Artwork'] = screenshots
+    data['Artwork'] = steamGame.screenshots.map(images => ({
+        'url' : images.path_full
+    }));
+
 
     updateRecord(recordID, data) // update base with new data
 }
