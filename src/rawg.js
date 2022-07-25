@@ -10,7 +10,7 @@ const api = `?key=${process.env.RAWG_API_KEY}`
 const getGame = async (name, type="games") => {
 // let xmlHttp = new XMLHttpRequest();
 
-const url = rawgURL + type + api;
+const url = `${rawgURL}${type}${api}&search=${name}&search_exact=true`;
 
 const response = await fetch(url);
 const data = await response.json();
@@ -32,4 +32,4 @@ console.log(data)
 
 // test call
 
-getGame("ori")
+getGame("v-rising")
