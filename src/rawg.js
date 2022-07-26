@@ -25,5 +25,5 @@ export class RAWG {
 
 // test call
 const game = new RAWG(api);
-await game.getGameInfo("v-rising")
+await game.getGameInfo("v-rising");
 game.searchResults;
