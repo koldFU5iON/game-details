@@ -6,8 +6,8 @@ import { RAWG } from "./rawg.js";
 // steamGame('recSXjkClU0xYAfea')
 
 // ============ testing RAWG API =============== //
-const game = new RAWG(process.env.RAWG_API_KEY);
+const record = new RAWG(process.env.RAWG_API_KEY);
 
-await game.getGameInfo("v-rising");
+await record.game("v RisIng ")
 
-console.log(game.searchResults);
+console.log(record.results.results[0].tags);
