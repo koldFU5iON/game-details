@@ -1,35 +1,29 @@
-import 'dotenv/config'
-import fetch from 'node-fetch'
+import fetch from "node-fetch";
 
-const rawgURL = "https://api.rawg.io/api/"
-const api = `?key=${process.env.RAWG_API_KEY}`
+//temporary needs to be called from main.js
+const api = process.env.RAWG_API_KEY;
 
-// GET https://api.rawg.io/api/platforms?key=YOUR_API_KEY
-// GET https://api.rawg.io/api/games?key=YOUR_API_KEY&dates=2019-09-01,2019-09-30&platforms=18,1,7
+export class RAWG {
+  constructor(apiKey) {
+    this.API_key = apiKey;
+  }
 
-const getGame = async (name, type="games") => {
-// let xmlHttp = new XMLHttpRequest();
+  _rawgURL = "https://api.rawg.io/api/";
+  static results = {};
 
-const url = `${rawgURL}${type}${api}&search=${name}&search_exact=true`;
+  getGameInfo = async (name, type = "games") => {
+    const url = `${this._rawgURL}${type}?key=${this.API_key}&search=${name}&search_exact=true`;
+    const response = await fetch(url);
 
-const response = await fetch(url);
-const data = await response.json();
+    this.results = await response.json();
+  };
 
-console.log(data)
-    // get request
-//     function httpGetAsync(theUrl, callback)
-// {
-//     var xmlHttp = new XMLHttpRequest();
-//     xmlHttp.onreadystatechange = function() { 
-//         if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
-//             callback(xmlHttp.responseText);
-//     }
-//     xmlHttp.open("GET", theUrl, true); // true for asynchronous 
-//     xmlHttp.send(null);
-// }
-
+  get searchResults() {
+    return this.results;
+  }
 }
 
 // test call
-
-getGame("v-rising")
+const game = new RAWG(api);
+await game.getGameInfo("v-rising")
+game.searchResults;

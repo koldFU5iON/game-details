@@ -1,6 +1,7 @@
 import { findRecord, updateRecord } from "./airtable_api.js";
 import { findGame } from "./steam_api.js";
 import { convert } from "html-to-markdown";
+import "dotenv/config";
 
 const data = {}; // data record to input necessary fields for updates
 // get record
