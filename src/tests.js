@@ -8,6 +8,6 @@ import { RAWG } from "./rawg.js";
 // ============ testing RAWG API =============== //
 const record = new RAWG(process.env.RAWG_API_KEY);
 
-await record.game("v RisIng ")
+await record.game("apex legends ")
 
-console.log(record.results.results[0].tags);
+console.log(record.results.results);
