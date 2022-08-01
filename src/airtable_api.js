@@ -1,11 +1,10 @@
 import Airtable from 'airtable';
 import 'dotenv/config';
+const env = process.env;
 
-const base = new Airtable({apiKey: process.env.AIRTABLE_API_KEY}).base(process.env.AIRTABLE_BASE_ID);
+const base = new Airtable({apiKey:env.AIRTABLE_API_KEY}).base(env.AIRTABLE_BASE_ID);
 
-// let recordID = 'recxZLSGzpE43yvdq' // test record
-const tableID = 'tblMXiuJrT9lvXo6U';
-const table = base(tableID);
+const table = base('tblMXiuJrT9lvXo6U');
 
 export const findRecord = async (recordID) => {
     try {
