@@ -1,7 +1,7 @@
 import Airtable from 'airtable';
 import 'dotenv/config';
 
-const base = new Airtable({apiKey: process.env.AIRTABLE_API_KEY}).base('appl2a4TBuQImJIiu');
+const base = new Airtable({apiKey: process.env.AIRTABLE_API_KEY}).base(process.env.AIRTABLE_BASE_ID);
 
 // let recordID = 'recxZLSGzpE43yvdq' // test record
 const tableID = 'tblMXiuJrT9lvXo6U';
